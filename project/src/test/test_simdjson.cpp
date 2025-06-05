@@ -384,4 +384,90 @@ namespace test_simdjson
 			return r2tm::eDoLeaveAction::Pause;
 		};
 	}
+
+
+
+	r2tm::TitleFunctionT Parse_Iterate::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Parse : Iterate : simdjson::fallback::ondemand::parser";
+		};
+	}
+	r2tm::DoFunctionT Parse_Iterate::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			DECLARATION_MAIN( const char* const path = "resource/json_from_plp.json" );
+
+			SS();
+
+			DECLARATION_MAIN( simdjson::padded_string s = simdjson::padded_string::load( path ) );
+
+			LS();
+
+			DECLARATION_MAIN( simdjson::fallback::ondemand::parser p );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "°á°ú µ¥ÀÌÅÍ È¹µæ : µ¥ÀÌÅÍ + error code" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.iterate( s ) );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
+
+				LF();
+
+				OUTPUT_NOTE( "µ¥ÀÌÅÍ ²¨³»´Â ¹ýÀ» ¸ð¸£°Ú¾î" );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "µ¥ÀÌÅÍ È¹µæ" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::fallback::ondemand::document doc = p.iterate( s ) );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::fallback::ondemand::array ary = doc.get_array() );
+				DECLARATION_MAIN( simdjson::fallback::ondemand::object obj = ary.at( 0 ) );
+				OUTPUT_VALUE( obj["idx"] );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "¿¡·¯ ¸Þ¼¼Áö¿Í µ¥ÀÌÅÍ È¹µæ" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::fallback::ondemand::document doc );
+				DECLARATION_MAIN( simdjson::error_code error = p.iterate( s ).get( doc ) );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, error );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::fallback::ondemand::array ary = doc.get_array() );
+				DECLARATION_MAIN( simdjson::fallback::ondemand::object obj = ary.at( 0 ) );
+				OUTPUT_VALUE( obj["idx"] );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
 }
