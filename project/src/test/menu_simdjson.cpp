@@ -27,6 +27,7 @@ r2tm::WriteFunctionT Menu_SimdJson::GetWriteFunction() const
 	return []( r2tm::MenuProcessor* mp )
 	{
 		mp->AddItem( '1', test_simdjson::Basic() );
+		mp->AddItem( '2', test_simdjson::ErrorCode() );
 
 
 
