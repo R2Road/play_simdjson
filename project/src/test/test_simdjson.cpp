@@ -304,4 +304,81 @@ namespace test_simdjson
 			return r2tm::eDoLeaveAction::Pause;
 		};
 	}
+
+
+
+	r2tm::TitleFunctionT PaddedString::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Padded String";
+		};
+	}
+	r2tm::DoFunctionT PaddedString::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			OUTPUT_SUBJECT( "parser의 작동을 용이하게 해주는 문자열 타입" );
+			OUTPUT_SUBJECT( "...이란다." );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "기본 생성자" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::padded_string s );
+
+				LF();
+
+				EXPECT_EQ( 0, s.length() );
+				EXPECT_EQ( 0, s.size() );
+				EXPECT_EQ( nullptr, s.data() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "char*" );
+
+				LF();
+
+				DECLARATION_MAIN( const char* c = "123" );
+				DECLARATION_MAIN( const simdjson::padded_string s( c, strlen( c ) ) );
+
+				LF();
+
+				EXPECT_EQ( strlen( c ), s.length() );
+				EXPECT_EQ( strlen( c ), s.size() );
+				EXPECT_NE( c, s.data() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "File" );
+
+				LF();
+
+				DECLARATION_MAIN( const char* f = "resource/json_from_plp.json" );
+
+				SS();
+
+				DECLARATION_MAIN( simdjson::simdjson_result result = simdjson::padded_string::load( f ) );
+				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
+
+				SS();
+
+				DECLARATION_MAIN( simdjson::padded_string s = simdjson::padded_string::load( f ) );
+				OUTPUT_VALUE( s );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
 }
