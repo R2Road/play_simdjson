@@ -216,7 +216,7 @@ namespace test_simdjson
 		{
 			LS();
 
-			DECLARATION_MAIN( const char* const path = "F:/Work/0_Pragma/9_etcProject/play_simdjson/project/resource/json_from_plp.json" );
+			DECLARATION_MAIN( const char* const path = "resource/json_from_plp.json" );
 
 			LS();
 

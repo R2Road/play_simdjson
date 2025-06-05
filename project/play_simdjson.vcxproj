@@ -162,7 +162,10 @@ xcopy "$(ProjectDir)external\vld\bin\Win32\*.*" "$(OutDir)" /D /E /I /F /Y</Comm
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
-xcopy "$(ProjectDir)external\vld\bin\Win64\*.*" "$(OutDir)" /D /E /I /F /Y</Command>
+xcopy "$(ProjectDir)external\vld\bin\Win64\*.*" "$(OutDir)" /D /E /I /F /Y
+
+if not exist "$(OutDir)resource" mkdir "$(OutDir)resource"
+xcopy "$(ProjectDir)resource\*.*" "$(OutDir)resource" /D /E /I /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -210,8 +213,8 @@ xcopy "$(ProjectDir)external\vld\bin\Win64\*.*" "$(OutDir)" /D /E /I /F /Y</Comm
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>if not exist "$(OutDir)resource" mkdir "$(OutDir)resource"
+xcopy "$(ProjectDir)resource\*.*" "$(OutDir)resource" /D /E /I /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
