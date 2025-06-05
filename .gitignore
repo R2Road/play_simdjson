@@ -1,0 +1,5 @@
+project/.vs/*
+project/Debug/*
+project/x64/*
+project/Release/*
+project/play_simdjson/*
