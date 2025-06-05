@@ -73,14 +73,13 @@ namespace test_simdjson
 		{
 			LS();
 
-			OUTPUT_COMMENT( "Load, Parse 등의 결과를 simdjson::error_code 로 확인 한다." );
-			OUTPUT_COMMENT( "simdjson::error_code는 대응하는 operator<<가 존재 한다." );
-			OUTPUT_COMMENT( "미리 준비된 error message 를 확인 가능하다." );
+			OUTPUT_SUBJECT( "Load, Parse 등의 결과를 simdjson::error_code 로 확인 한다." );
+			OUTPUT_SUBJECT( "simdjson::error_code는 대응하는 operator<<가 존재 한다." );
+			OUTPUT_SUBJECT( "미리 준비된 error message 를 확인 가능하다." );
 
 			LS();
 
 			DECLARATION_MAIN( simdjson::dom::parser parser );
-			DECLARATION_MAIN( simdjson::dom::element datas );
 
 			LS();
 
@@ -89,11 +88,11 @@ namespace test_simdjson
 
 				LF();
 
-				DECLARATION_MAIN( const auto abstract_json = R"()"_padded );
+				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"()"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).get( datas ) );
+				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
 
 				LF();
 
@@ -108,11 +107,11 @@ namespace test_simdjson
 
 				LF();
 
-				DECLARATION_MAIN( const auto abstract_json = R"( [ )"_padded );
+				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"( [ )"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).get( datas ) );
+				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
 
 				LF();
 
@@ -127,11 +126,11 @@ namespace test_simdjson
 
 				LF();
 
-				DECLARATION_MAIN( const auto abstract_json = R"( [] )"_padded );
+				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"( [] )"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).get( datas ) );
+				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
 
 				LF();
 
