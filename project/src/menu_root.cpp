@@ -5,7 +5,7 @@
 #include "r2tm/r2tm_MenuProcessor.h"
 #include "r2tm/r2tm_VersionInfo.h"
 
-#include "test/menu_simdjson.h"
+#include "test/test_simdjson.h"
 
 r2tm::TitleFunctionT Menu_Root::GetTitleFunction() const
 {
@@ -29,7 +29,8 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 {
 	return []( r2tm::MenuProcessor* mp )
 	{
-		mp->AddMenu( '1', Menu_SimdJson() );
+		mp->AddItem( '1', test_simdjson::Basic() );
+		mp->AddItem( '2', test_simdjson::ErrorCode() );
 
 
 		

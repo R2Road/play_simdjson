@@ -41,9 +41,6 @@
     <ClCompile Include="external\simdjson\simdjson.cpp">
       <Filter>external\simdjson</Filter>
     </ClCompile>
-    <ClCompile Include="src\test\menu_simdjson.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
     <ClCompile Include="src\test\test_simdjson.cpp">
       <Filter>test</Filter>
     </ClCompile>
@@ -97,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="external\simdjson\simdjson.h">
       <Filter>external\simdjson</Filter>
-    </ClInclude>
-    <ClInclude Include="src\test\menu_simdjson.h">
-      <Filter>test</Filter>
     </ClInclude>
     <ClInclude Include="src\test\test_simdjson.h">
       <Filter>test</Filter>
