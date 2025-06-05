@@ -34,6 +34,14 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 
 
 		
+		mp->AddLineFeed();
+
+
+
+		mp->AddItem( 'q', test_simdjson::Parse_String() );
+
+
+
 		mp->AddSplit();
 
 

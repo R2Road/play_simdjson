@@ -127,6 +127,63 @@ namespace test_simdjson
 
 				LF();
 
+				DECLARATION_MAIN( const auto abstract_json = R"( [] )"_padded );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).get( datas ) );
+
+				LF();
+
+				EXPECT_EQ( error, simdjson::error_code::SUCCESS );
+				OUTPUT_VALUE( simdjson::error_code::SUCCESS );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
+
+
+
+	r2tm::TitleFunctionT Parse_String::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Parse : String";
+		};
+	}
+	r2tm::DoFunctionT Parse_String::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			DECLARATION_MAIN( simdjson::dom::parser parser );
+			DECLARATION_MAIN( simdjson::dom::element datas );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "µ•¿Ã≈Õ »πµÊ" );
+
+				LF();
+
+				DECLARATION_MAIN( const auto abstract_json = R"( [1, 2, 3, 4] )"_padded );
+
+				LF();
+
+				PROCESS_MAIN( datas = parser.parse( abstract_json ) );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "ø°∑Ø ∏ﬁºº¡ˆøÕ µ•¿Ã≈Õ »πµÊ" );
+
+				LF();
+
 				DECLARATION_MAIN( const auto abstract_json = R"( [1, 2, 3, 4] )"_padded );
 
 				LF();
