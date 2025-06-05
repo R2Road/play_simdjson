@@ -31,6 +31,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 	{
 		mp->AddItem( '1', test_simdjson::Basic() );
 		mp->AddItem( '2', test_simdjson::ErrorCode() );
+		mp->AddItem( '3', test_simdjson::PaddedString() );
 
 
 		
@@ -40,7 +41,6 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 
 		mp->AddItem( 'q', test_simdjson::Parse_String() );
 		mp->AddItem( 'w', test_simdjson::Parse_File() );
-		mp->AddItem( 'e', test_simdjson::PaddedString() );
 
 
 
