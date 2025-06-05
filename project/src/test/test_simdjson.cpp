@@ -188,6 +188,20 @@ namespace test_simdjson
 			LS();
 
 			{
+				OUTPUT_SUBJECT( "잘못된 데이터" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( R"( [ )"_padded ) );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::TAPE_ERROR, result.error() );
+			}
+
+			LS();
+
+			{
 				OUTPUT_SUBJECT( "데이터 획득" );
 
 				LF();
