@@ -200,4 +200,77 @@ namespace test_simdjson
 			return r2tm::eDoLeaveAction::Pause;
 		};
 	}
+
+
+
+	r2tm::TitleFunctionT Parse_File::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Parse : File";
+		};
+	}
+	r2tm::DoFunctionT Parse_File::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			DECLARATION_MAIN( const char* const path = "F:/Work/0_Pragma/9_etcProject/play_simdjson/project/resource/json_from_plp.json" );
+
+			LS();
+
+			DECLARATION_MAIN( simdjson::dom::parser p );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "°á°ú µ¥ÀÌÅÍ È¹µæ : µ¥ÀÌÅÍ + error code" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.load( path ) );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::element datas );
+				PROCESS_MAIN( result.get( datas ) );
+				OUTPUT_VALUE( datas.type() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "µ¥ÀÌÅÍ È¹µæ" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::dom::element datas = p.load( path ) );
+				OUTPUT_VALUE( datas.type() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "¿¡·¯ ¸Þ¼¼Áö¿Í µ¥ÀÌÅÍ È¹µæ" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::element datas );
+				DECLARATION_MAIN( const simdjson::error_code error = p.load( path ).get( datas ) );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, error );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
 }
