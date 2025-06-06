@@ -4,7 +4,7 @@
 
 namespace test_basic
 {
-	class Basic : public r2tm::iItem
+	class Demo : public r2tm::iItem
 	{
 	public:
 		r2tm::TitleFunctionT GetTitleFunction() const override;

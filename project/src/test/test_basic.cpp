@@ -7,14 +7,14 @@
 
 namespace test_basic
 {
-	r2tm::TitleFunctionT Basic::GetTitleFunction() const
+	r2tm::TitleFunctionT Demo::GetTitleFunction() const
 	{
 		return []()->const char*
 		{
-			return "SimdJson : Basic";
+			return "Demo";
 		};
 	}
-	r2tm::DoFunctionT Basic::GetDoFunction() const
+	r2tm::DoFunctionT Demo::GetDoFunction() const
 	{
 		return []()->r2tm::eDoLeaveAction
 		{

@@ -34,7 +34,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 {
 	return []( r2tm::MenuProcessor* mp )
 	{
-		mp->AddItem( '1', test_basic::Basic() );
+		mp->AddItem( '1', test_basic::Demo() );
 		mp->AddItem( '2', test_basic::ResultType() );
 		mp->AddItem( '3', test_basic::ErrorCode() );
 		mp->AddItem( '4', test_basic::PaddedString() );
