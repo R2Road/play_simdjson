@@ -202,7 +202,7 @@ namespace test_simdjson
 
 				LF();
 
-				DECLARATION_MAIN( const char* f = "resource/json_from_plp.json" );
+				DECLARATION_MAIN( const char* f = "resource/json_basic.json" );
 
 				SS();
 
