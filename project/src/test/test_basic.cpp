@@ -60,6 +60,61 @@ namespace test_basic
 
 
 
+	r2tm::TitleFunctionT ResultType::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "ResultType";
+		};
+	}
+	r2tm::DoFunctionT ResultType::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			OUTPUT_SUBJECT( "대부분의 경우 simdjson 의 메소드들은 simdjson_result 를 반환한다" );
+			OUTPUT_SUBJECT( "std::pair 기반" );
+			OUTPUT_SUBJECT( "error code + data" );
+
+			LS();
+
+			DECLARATION_MAIN( simdjson::dom::parser p );
+			DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( R"( [1] )"_padded ) );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "simdjson_result::error() : 에러 코드 확보" );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "simdjson_result::get() : 값 추출 + 에러 코드 반환" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::array a );
+				EXPECT_EQ( simdjson::error_code::SUCCESS, result.get( a ) );
+
+				LF();
+
+				EXPECT_EQ( 1, a.size() );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
+
+
+
 	r2tm::TitleFunctionT ErrorCode::GetTitleFunction() const
 	{
 		return []()->const char*
