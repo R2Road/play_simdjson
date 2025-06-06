@@ -113,11 +113,6 @@ namespace test_element
 
 				DECLARATION_MAIN( simdjson::dom::element at_3 = a.at( 3 ) );
 				EXPECT_EQ( 3, at_3.get_int64() );
-
-				LF();
-
-				OUTPUT_COMMENT( "element 에서 바로 형변환." );
-				EXPECT_EQ( 3, int64_t( a.at( 3 ) ) );
 			}
 
 			LS();
@@ -219,6 +214,53 @@ namespace test_element
 
 				DECLARATION_MAIN( simdjson::dom::element at_path_b_2 = o.at_path( "$.b[2]" ));
 				EXPECT_EQ( 2, at_path_b_2.get_int64() );
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
+
+
+
+	r2tm::TitleFunctionT Element_Int::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Element : Int";
+		};
+	}
+	r2tm::DoFunctionT Element_Int::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			DECLARATION_MAIN( const auto s = R"( [123] )"_padded );
+			DECLARATION_MAIN( simdjson::dom::parser p );
+			DECLARATION_MAIN( const simdjson::dom::element datas = p.parse( s ) );
+
+			LS();
+
+			DECLARATION_MAIN( const simdjson::dom::array a = datas.get_array() );
+
+			LS();
+
+			DECLARATION_MAIN( const auto i = a.at( 0 ) );
+			EXPECT_EQ( simdjson::error_code::SUCCESS, i.error() );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "따로 int 타입이 있는 것이 아니다." );
+				OUTPUT_SUBJECT( "simdjson_result<int64_t> 반환" );
+
+				LF();
+
+				EXPECT_EQ( 123, i.get_int64().take_value() );
+				EXPECT_EQ( 123, i.get_int64() );
+				EXPECT_EQ( 123, int64_t( i ) );
 			}
 
 			LS();

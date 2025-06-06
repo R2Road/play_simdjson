@@ -46,6 +46,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 		mp->AddItem( 'e', test_element::Element_Get() );
 		mp->AddItem( 'r', test_element::Element_Array() );
 		mp->AddItem( 't', test_element::Element_Object() );
+		mp->AddItem( 'y', test_element::Element_Int() );
 
 
 
