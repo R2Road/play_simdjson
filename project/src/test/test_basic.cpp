@@ -88,15 +88,15 @@ namespace test_basic
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"()"_padded );
+				DECLARATION_MAIN( const auto s = R"()"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
+				DECLARATION_MAIN( const simdjson::error_code e = parser.parse( s ).error() );
 
 				LF();
 
-				EXPECT_EQ( simdjson::error_code::EMPTY, error );
+				EXPECT_EQ( simdjson::error_code::EMPTY, e );
 				OUTPUT_VALUE( simdjson::error_code::EMPTY );
 			}
 
@@ -107,15 +107,15 @@ namespace test_basic
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"( [ )"_padded );
+				DECLARATION_MAIN( const auto s = R"( [ )"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
+				DECLARATION_MAIN( const simdjson::error_code e = parser.parse( s ).error() );
 
 				LF();
 
-				EXPECT_EQ( simdjson::error_code::TAPE_ERROR, error );
+				EXPECT_EQ( simdjson::error_code::TAPE_ERROR, e );
 				OUTPUT_VALUE( simdjson::error_code::TAPE_ERROR );
 			}
 
@@ -126,15 +126,15 @@ namespace test_basic
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::padded_string abstract_json = R"( [] )"_padded );
+				DECLARATION_MAIN( const auto s = R"( [] )"_padded );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::error_code error = parser.parse( abstract_json ).error() );
+				DECLARATION_MAIN( const simdjson::error_code e = parser.parse( s ).error() );
 
 				LF();
 
-				EXPECT_EQ( error, simdjson::error_code::SUCCESS );
+				EXPECT_EQ( simdjson::error_code::SUCCESS, e );
 				OUTPUT_VALUE( simdjson::error_code::SUCCESS );
 			}
 
