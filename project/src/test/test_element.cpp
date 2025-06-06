@@ -43,12 +43,29 @@ namespace test_element
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "type을 지정하면 data만 빼낼 수 있다." );
+				OUTPUT_SUBJECT( "simdjson_result::take_value() 로 값 추출" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::array a = datas.get_array().take_value() );
+
+				LF();
+
+				EXPECT_EQ( 1, a.size() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "type 지정으로 값 추출" );
 
 				LF();
 
 				DECLARATION_MAIN( simdjson::dom::array a = datas.get_array() );
-				a.at( 0 );
+
+				LF();
+
+				EXPECT_EQ( 1, a.size() );
 
 				LF();
 
