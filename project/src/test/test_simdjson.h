@@ -27,20 +27,6 @@ namespace test_simdjson
 
 
 
-	class Parse_String : public r2tm::iItem
-	{
-	public:
-		r2tm::TitleFunctionT GetTitleFunction() const override;
-		r2tm::DoFunctionT GetDoFunction() const override;
-	};
-
-	class Parse_File : public r2tm::iItem
-	{
-	public:
-		r2tm::TitleFunctionT GetTitleFunction() const override;
-		r2tm::DoFunctionT GetDoFunction() const override;
-	};
-
 	class Element_Array : public r2tm::iItem
 	{
 	public:

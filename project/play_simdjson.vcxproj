@@ -29,6 +29,7 @@
     <ClCompile Include="external\simdjson\simdjson.cpp" />
     <ClCompile Include="src\menu_root.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\test\test_parser.cpp" />
     <ClCompile Include="src\test\test_simdjson.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,7 @@
     <ClInclude Include="external\r2tm\r2tm_WindowsUtility.h" />
     <ClInclude Include="external\simdjson\simdjson.h" />
     <ClInclude Include="src\menu_root.h" />
+    <ClInclude Include="src\test\test_parser.h" />
     <ClInclude Include="src\test\test_simdjson.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
