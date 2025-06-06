@@ -417,7 +417,7 @@ namespace test_simdjson
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::simdjson_result result = p.iterate( s ) );
+				DECLARATION_MAIN( simdjson::simdjson_result result = p.iterate( s ) );
 
 				LF();
 
@@ -426,6 +426,7 @@ namespace test_simdjson
 				LF();
 
 				OUTPUT_NOTE( "데이터 꺼내는 법을 모르겠어" );
+				OUTPUT_NOTE( "안되겠다 일단 후퇴. 2025.06.06" );
 			}
 
 			LS();
