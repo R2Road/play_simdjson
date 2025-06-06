@@ -5,9 +5,9 @@
 #include "r2tm/r2tm_MenuProcessor.h"
 #include "r2tm/r2tm_VersionInfo.h"
 
+#include "test/test_basic.h"
 #include "test/test_element.h"
 #include "test/test_parser.h"
-#include "test/test_simdjson.h"
 
 r2tm::TitleFunctionT Menu_Root::GetTitleFunction() const
 {
@@ -31,9 +31,9 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 {
 	return []( r2tm::MenuProcessor* mp )
 	{
-		mp->AddItem( '1', test_simdjson::Basic() );
-		mp->AddItem( '2', test_simdjson::ErrorCode() );
-		mp->AddItem( '3', test_simdjson::PaddedString() );
+		mp->AddItem( '1', test_basic::Basic() );
+		mp->AddItem( '2', test_basic::ErrorCode() );
+		mp->AddItem( '3', test_basic::PaddedString() );
 
 
 		
@@ -56,7 +56,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 
 		mp->AddMessage( "simdjson::fallback::ondemand::parser", r2tm::eColor::FG_LightGreen );
 		mp->AddMessage( "스트리밍 방식으로 성능상에 이점이 있단다.", r2tm::eColor::FG_LightGreen );
-		mp->AddItem( 'z', test_simdjson::Parse_Iterate() );
+		mp->AddItem( 'z', test_basic::Parse_Iterate() );
 
 
 

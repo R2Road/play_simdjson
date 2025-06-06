@@ -1,11 +1,11 @@
-#include "test_simdjson.h"
+#include "test_basic.h"
 
 #include "r2tm/r2tm_Inspector.h"
 #include "r2tm/r2tm_ostream.h"
 
 #include "simdjson/simdjson.h"
 
-namespace test_simdjson
+namespace test_basic
 {
 	r2tm::TitleFunctionT Basic::GetTitleFunction() const
 	{
