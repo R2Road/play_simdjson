@@ -44,6 +44,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 		mp->AddItem( 'q', test_parser::Parse_String() );
 		mp->AddItem( 'w', test_parser::Parse_File() );
 		mp->AddItem( 'e', test_element::Element_Array() );
+		mp->AddItem( 'r', test_element::Element_Object() );
 
 
 
