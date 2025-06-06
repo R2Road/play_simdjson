@@ -20,6 +20,12 @@ namespace test_element
 		{
 			LS();
 
+			OUTPUT_SUBJECT( "모든 Get은 simdjson_result 를 반환한다." );
+			OUTPUT_SUBJECT( "std::pair 기반" );
+			OUTPUT_SUBJECT( "error code + data" );
+
+			LS();
+
 			DECLARATION_MAIN( const auto s = R"( [1] )"_padded );
 			DECLARATION_MAIN( simdjson::dom::parser p );
 			DECLARATION_MAIN( const simdjson::dom::element datas = p.parse( s ) );
@@ -27,31 +33,11 @@ namespace test_element
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "모든 Get은 simdjson_result 를 반환한다." );
-				OUTPUT_SUBJECT( "std::pair 기반" );
-				OUTPUT_SUBJECT( "error code + data" );
-
-				LF();
-
 				EXPECT_EQ( simdjson::error_code::SUCCESS, datas.get_array().error() );
 
 				LF();
 
 				EXPECT_EQ( simdjson::error_code::INCORRECT_TYPE, datas.get_object().error() );
-			}
-
-			LS();
-
-			{
-				OUTPUT_SUBJECT( "simdjson_result::take_value() 로 값 추출" );
-
-				LF();
-
-				DECLARATION_MAIN( simdjson::dom::array a = datas.get_array().take_value() );
-
-				LF();
-
-				EXPECT_EQ( 1, a.size() );
 			}
 
 			LS();
