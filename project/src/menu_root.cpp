@@ -41,7 +41,16 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 
 		mp->AddItem( 'q', test_simdjson::Parse_String() );
 		mp->AddItem( 'w', test_simdjson::Parse_File() );
-		mp->AddItem( 'e', test_simdjson::Parse_Iterate() );
+
+
+
+		mp->AddLineFeed();
+
+
+
+		mp->AddMessage( "simdjson::fallback::ondemand::parser", r2tm::eColor::FG_LightGreen );
+		mp->AddMessage( "스트리밍 방식으로 성능상에 이점이 있단다.", r2tm::eColor::FG_LightGreen );
+		mp->AddItem( 'z', test_simdjson::Parse_Iterate() );
 
 
 

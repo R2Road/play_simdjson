@@ -391,7 +391,7 @@ namespace test_simdjson
 	{
 		return []()->const char*
 		{
-			return "Parse : Iterate : simdjson::fallback::ondemand::parser";
+			return "Parse : Iterate";
 		};
 	}
 	r2tm::DoFunctionT Parse_Iterate::GetDoFunction() const
