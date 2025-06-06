@@ -109,6 +109,20 @@ namespace test_basic
 
 			LS();
 
+			{
+				OUTPUT_SUBJECT( "simdjson_result 가 필요 없다면 바로 값 추출" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::array a = p.parse( R"( [1] )"_padded ) );
+
+				LF();
+
+				EXPECT_EQ( 1, a.size() );
+			}
+
+			LS();
+
 			return r2tm::eDoLeaveAction::Pause;
 		};
 	}
