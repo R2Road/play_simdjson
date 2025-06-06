@@ -80,21 +80,22 @@ namespace test_basic
 			LS();
 
 			DECLARATION_MAIN( simdjson::dom::parser p );
-			DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( R"( [1] )"_padded ) );
 
 			LS();
 
 			{
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( R"( [1] )"_padded ) );
+
+				SS();
+
 				OUTPUT_SUBJECT( "simdjson_result::error() : 에러 코드 확보" );
 
 				LF();
 
 				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
-			}
 
-			LS();
+				SS();
 
-			{
 				OUTPUT_SUBJECT( "simdjson_result::get() : 값 추출 + 에러 코드 반환" );
 
 				LF();
@@ -110,7 +111,22 @@ namespace test_basic
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "simdjson_result 가 필요 없다면 바로 값 추출" );
+				OUTPUT_SUBJECT( "simdjson_result 가 필요 없다면 바로 값 추출 1" );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::element data = p.parse( R"( [1] )"_padded ) );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::array a = data.get_array() );
+				EXPECT_EQ( 1, a.size() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "simdjson_result 가 필요 없다면 바로 값 추출 2" );
 
 				LF();
 
