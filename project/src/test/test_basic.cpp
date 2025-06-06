@@ -128,8 +128,8 @@ namespace test_basic
 		{
 			LS();
 
-			OUTPUT_SUBJECT( "Load, Parse 등의 결과를 simdjson::error_code 로 확인 한다." );
-			OUTPUT_SUBJECT( "simdjson::error_code는 대응하는 operator<<가 존재 한다." );
+			OUTPUT_SUBJECT( "메소드의 작동 결과를 simdjson::error_code 로 확인." );
+			OUTPUT_SUBJECT( "simdjson::error_code는 대응하는 operator<< 가 존재 한다." );
 			OUTPUT_SUBJECT( "미리 준비된 error message 를 확인 가능하다." );
 
 			LS();
