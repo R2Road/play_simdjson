@@ -20,30 +20,21 @@ namespace test_parser
 		{
 			LS();
 
-			DECLARATION_MAIN( const simdjson::padded_string jsong_string = R"( [1, 2, 3, 4] )"_padded );
-
-			LS();
-
 			DECLARATION_MAIN( simdjson::dom::parser p );
 
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "°á°ú µ¥ÀÌÅÍ È¹µæ : µ¥ÀÌÅÍ + error code" );
+				OUTPUT_SUBJECT( "Á¤»ó µ¥ÀÌÅÍ" );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( jsong_string ) );
+				DECLARATION_MAIN( const simdjson::padded_string s = R"( [1, 2, 3, 4] )"_padded );
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( s ) );
 
 				LF();
 
 				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
-
-				LF();
-
-				DECLARATION_MAIN( simdjson::dom::element datas );
-				PROCESS_MAIN( result.get( datas ) );
-				OUTPUT_VALUE( datas.type() );
 			}
 
 			LS();
@@ -53,38 +44,12 @@ namespace test_parser
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( R"( [ )"_padded ) );
+				DECLARATION_MAIN( const simdjson::padded_string s = R"( [ )"_padded );
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.parse( s ) );
 
 				LF();
 
 				EXPECT_EQ( simdjson::error_code::TAPE_ERROR, result.error() );
-			}
-
-			LS();
-
-			{
-				OUTPUT_SUBJECT( "µ¥ÀÌÅÍ È¹µæ" );
-
-				LF();
-
-				DECLARATION_MAIN( const simdjson::dom::element datas = p.parse( jsong_string ) );
-				OUTPUT_VALUE( datas.type() );
-			}
-
-			LS();
-
-			{
-				OUTPUT_SUBJECT( "¿¡·¯ ¸Þ¼¼Áö¿Í µ¥ÀÌÅÍ È¹µæ" );
-
-				LF();
-
-				DECLARATION_MAIN( simdjson::dom::element datas );
-				DECLARATION_MAIN( const simdjson::error_code error = p.parse( jsong_string ).get( datas ) );
-
-				LF();
-
-				EXPECT_EQ( simdjson::error_code::SUCCESS, error );
-				OUTPUT_VALUE( datas.type() );
 			}
 
 			LS();
