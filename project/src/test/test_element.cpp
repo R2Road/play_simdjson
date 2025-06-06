@@ -7,6 +7,65 @@
 
 namespace test_element
 {
+	r2tm::TitleFunctionT Element_Get::GetTitleFunction() const
+	{
+		return []()->const char*
+		{
+			return "Element : Get";
+		};
+	}
+	r2tm::DoFunctionT Element_Get::GetDoFunction() const
+	{
+		return []()->r2tm::eDoLeaveAction
+		{
+			LS();
+
+			DECLARATION_MAIN( const auto s = R"( [1] )"_padded );
+			DECLARATION_MAIN( simdjson::dom::parser p );
+			DECLARATION_MAIN( const simdjson::dom::element datas = p.parse( s ) );
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "모든 Get은 simdjson_result 를 반환한다." );
+				OUTPUT_SUBJECT( "std::pair 기반" );
+				OUTPUT_SUBJECT( "error code + data" );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::SUCCESS, datas.get_array().error() );
+
+				LF();
+
+				EXPECT_EQ( simdjson::error_code::INCORRECT_TYPE, datas.get_object().error() );
+			}
+
+			LS();
+
+			{
+				OUTPUT_SUBJECT( "type을 지정하면 data만 빼낼 수 있다." );
+
+				LF();
+
+				DECLARATION_MAIN( simdjson::dom::array a = datas.get_array() );
+				a.at( 0 );
+
+				LF();
+
+				OUTPUT_COMMENT( "type이 다르면 안된다." );
+				OUTPUT_SOURCE_READY_N_BEGIN;
+				// simdjson::dom::object o = datas.get_object();
+				OUTPUT_SOURCE_END;
+			}
+
+			LS();
+
+			return r2tm::eDoLeaveAction::Pause;
+		};
+	}
+
+
+
 	r2tm::TitleFunctionT Element_Array::GetTitleFunction() const
 	{
 		return []()->const char*
