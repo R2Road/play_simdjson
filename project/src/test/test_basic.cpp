@@ -198,21 +198,31 @@ namespace test_basic
 			LS();
 
 			{
+				OUTPUT_SUBJECT( "operator \"\"_padded" );
+
+				LF();
+
+				DECLARATION_MAIN( const simdjson::padded_string s = R"( [] )"_padded );
+
+				LF();
+
+				EXPECT_NE( nullptr, s.data() );
+			}
+
+			LS();
+
+			{
 				OUTPUT_SUBJECT( "File" );
 
 				LF();
 
 				DECLARATION_MAIN( const char* f = "resource/json_basic.json" );
-
-				SS();
-
 				DECLARATION_MAIN( simdjson::simdjson_result result = simdjson::padded_string::load( f ) );
 				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
 
-				SS();
+				LF();
 
-				DECLARATION_MAIN( simdjson::padded_string s = simdjson::padded_string::load( f ) );
-				OUTPUT_VALUE( s );
+				OUTPUT_VALUE( result.value() );
 			}
 
 			LS();
