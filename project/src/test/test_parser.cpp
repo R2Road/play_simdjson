@@ -73,16 +73,16 @@ namespace test_parser
 		{
 			LS();
 
-			DECLARATION_MAIN( const char* const path = "resource/json_from_plp.json" );
-
-			LS();
-
 			DECLARATION_MAIN( simdjson::dom::parser p );
 
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "결과 데이터 획득 : 데이터 + error code" );
+				OUTPUT_SUBJECT( "정상 데이터" );
+
+				LF();
+
+				DECLARATION_MAIN( const char* const path = "resource/json_basic.json" );
 
 				LF();
 
@@ -91,38 +91,24 @@ namespace test_parser
 				LF();
 
 				EXPECT_EQ( simdjson::error_code::SUCCESS, result.error() );
-
-				LF();
-
-				DECLARATION_MAIN( simdjson::dom::element datas );
-				PROCESS_MAIN( result.get( datas ) );
-				OUTPUT_VALUE( datas.type() );
 			}
 
 			LS();
 
 			{
-				OUTPUT_SUBJECT( "데이터 획득" );
+				OUTPUT_SUBJECT( "잘못된 데이터" );
 
 				LF();
 
-				DECLARATION_MAIN( const simdjson::dom::element datas = p.load( path ) );
-				OUTPUT_VALUE( datas.type() );
-			}
-
-			LS();
-
-			{
-				OUTPUT_SUBJECT( "에러 메세지와 데이터 획득" );
+				DECLARATION_MAIN( const char* const path = "resource/json_wrong.json" );
 
 				LF();
 
-				DECLARATION_MAIN( simdjson::dom::element datas );
-				DECLARATION_MAIN( const simdjson::error_code error = p.load( path ).get( datas ) );
+				DECLARATION_MAIN( const simdjson::simdjson_result result = p.load( path ) );
 
 				LF();
 
-				EXPECT_EQ( simdjson::error_code::SUCCESS, error );
+				EXPECT_EQ( simdjson::error_code::TAPE_ERROR, result.error() );
 			}
 
 			LS();
