@@ -5,6 +5,7 @@
 #include "r2tm/r2tm_MenuProcessor.h"
 #include "r2tm/r2tm_VersionInfo.h"
 
+#include "test/test_element.h"
 #include "test/test_parser.h"
 #include "test/test_simdjson.h"
 
@@ -42,7 +43,7 @@ r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
 
 		mp->AddItem( 'q', test_parser::Parse_String() );
 		mp->AddItem( 'w', test_parser::Parse_File() );
-		mp->AddItem( 'e', test_simdjson::Element_Array() );
+		mp->AddItem( 'e', test_element::Element_Array() );
 
 
 
