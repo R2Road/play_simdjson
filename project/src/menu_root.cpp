@@ -24,7 +24,10 @@ r2tm::DescriptionFunctionT Menu_Root::GetDescriptionFunction() const
 {
 	return []()->const char*
 	{
-		return "";
+		return
+					"    " "[o] " "읽기 기능 확인"
+			"\n"	"    " "[~] " "쓰기 기능 확인 : 해당 기능이 미구현 상태"
+			"\n"	"    " "  > " "이러면 쓸 수 없다.";
 	};
 }
 r2tm::WriteFunctionT Menu_Root::GetWriteFunction() const
